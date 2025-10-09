@@ -5,7 +5,7 @@ This module generates random math equations for the Nerdle game.
 It creates valid equations in the format: number operator number = result
 For example: 12+34=46 or 8*7=56
 """
-
+import random
 ########################################
 # TODO: Import the appropriate modules #
 ########################################
@@ -18,12 +18,16 @@ def generate_numbers_for_addition():
     """
     Generate two numbers that when added create an 8-character equation.
     Returns a tuple of (num1, num2, result)
-    
-    For addition, we want numbers that create 8 total characters
-    Format: NN+NN=NN (2+1+2+1+2 = 8 characters)
-
+    Format: NN+NN=NN  (2+1+2+1+2 = 8 characters)
     Example: (12, 34, 46) creates "12+34=46"
     """
+    while True:
+        num1 = random.randint(10, 99)
+        num2 = random.randint(10, 99)
+        result = num1 + num2
+        equation = f"{num1}+{num2}={result}"
+        if len(equation) == 8:
+            return  num1, num2, result
 
 def generate_numbers_for_subtraction():
     """
@@ -35,6 +39,13 @@ def generate_numbers_for_subtraction():
 
     Example: (56, 23, 33) creates "56-23=33"
     """
+    while True:
+        num1 = random.randint(20, 99)
+        num2 = random.randint(10, num1 - 1)
+        result = num1 - num2
+        equation = f"{num1}-{num2}={result}"
+        if len(equation) == 8:
+            return num1, num2, result
 
 def generate_numbers_for_multiplication():
     """
@@ -47,6 +58,13 @@ def generate_numbers_for_multiplication():
     
     Example: (3, 34, 102) creates "3*34=102" (8 characters)
     """
+    while True:
+        num1 = random.randint(2, 9)
+        num2 = random.randint(10, 99)
+        result = num1 * num2
+        equation = f"{num1}*{num2}={result}"
+        if len(equation) == 8:
+            return num1, num2, result
 
 def generate_numbers_for_division():
     """
@@ -59,6 +77,14 @@ def generate_numbers_for_division():
 
     Example: (252, 36, 7) creates "252/36=7"
     """
+    while True:
+        result = random.randint(2, 9)
+        divisor = random.randint(10, 99)
+        dividend = result * divisor
+        equation = f"{dividend}/{divisor}={result}"
+        if len(equation) == 8:
+            return dividend, divisor, result
+
     
 ################################################################################
 #  DO NOT EDIT BELOW THIS LINE, THESE FUNCTIONS ARE ALREADY COMPLETED FOR YOU  #
@@ -79,6 +105,7 @@ def generate_equation():
     
     The equation will always be exactly 8 characters long and mathematically correct.
     """
+
     # Choose a random operation
     operations = ['+', '-', '*', '/']
     operation = random.choice(operations)
